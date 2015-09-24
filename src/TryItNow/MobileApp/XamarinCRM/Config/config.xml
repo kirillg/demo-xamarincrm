@@ -3,11 +3,12 @@
 <config>
   <!-- Enter the Application URL for your instance of the JS-based Azure Mobile Service (for customer, account and order data) -->
 
-  <customerDataServiceUrl>https://mycrm2.azure-mobile.net/</customerDataServiceUrl>
+  <customerDataServiceUrl>{siteurl}</customerDataServiceUrl>
   <!--https://xamarincrmv2-customerdataservice.azure-mobile.net/-->
   <!--https://xamarincrmv2-catalogdataservice.azure-mobile.net/api/-->
   <!-- Enter the Application URL for your instance of the .NET Web API -based Azure Mobile Service (for catalog data) -->
-  <catalogDataServiceUrl>https://mycrm2.azure-mobile.net/api/</catalogDataServiceUrl>
+  <catalogDataServiceUrl>{siteurl}</catalogDataServiceUrl>
+  <localDbName>{sitename}</localDbName>
 
   <!---Azure Active Directory Authentication tenant authority URL -->
   <azureActiveDirectoryAuthenticationTenantAuthorityUrl>https://login.windows.net/xamcrm.onmicrosoft.com</azureActiveDirectoryAuthenticationTenantAuthorityUrl>

@@ -10,6 +10,7 @@ using Xamarin.Forms;
 using XamarinCRM.Clients;
 using XamarinCRM.Models;
 using XamarinCRM.Services;
+using System.Runtime.CompilerServices;
 
 [assembly: Dependency(typeof(CustomerDataClient))]
 
@@ -21,10 +22,12 @@ namespace XamarinCRM.Clients
         IMobileServiceSyncTable<Account> _AccountTable;
 
         public IMobileServiceClient MobileService { get; set; }
+		IConfigFetcher _ConfigFetcher;
 
         public CustomerDataClient()
         {
             MobileService = AuthInfo.Instance.GetMobileServiceClient();
+			_ConfigFetcher = DependencyService.Get<IConfigFetcher>();
         }
 
         public bool DoesLocalDBExist()
@@ -36,8 +39,8 @@ namespace XamarinCRM.Clients
         {
             if (MobileService.SyncContext.IsInitialized)
                 return;
-
-            var store = new MobileServiceSQLiteStore("syncstore5.db");
+			var localDbName = await _ConfigFetcher.GetAsync("localDbName");
+            var store = new MobileServiceSQLiteStore(localDbName);
 
             store.DefineTable<Order>();
             store.DefineTable<Account>();
